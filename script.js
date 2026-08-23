@@ -149,12 +149,27 @@
     img.src = TICKET_TEMPLATE_SRC;
   }
 
-  // Настоящее мобильное устройство (iOS/Android) — только там системное окно
-  // "Поделиться" реально предлагает пункт "Сохранить изображение"/"В Фото".
-  // На компьютере (Mac/Windows/Linux) в этом окне такого пункта нет вообще —
-  // там сразу скачиваем файл обычным способом, в папку "Загрузки".
-  function isMobileOS() {
-    return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  function isIOS() {
+    return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  }
+  function isAndroid() {
+    return /Android/i.test(navigator.userAgent);
+  }
+
+  // На iPhone скачивание файла (<a download>) в любом браузере (Safari,
+  // Chrome, что угодно — на iOS все они работают на одном движке WebKit)
+  // кладёт файл в приложение "Файлы", а не в "Фото" — именно это и было
+  // жалобой. Открытие картинки напрямую во весь экран + "нажать и
+  // удерживать → Добавить в Фото" — единственный способ, который надёжно
+  // и одинаково работает на iPhone независимо от браузера и версии iOS.
+  function openImageFullScreen(blob, statusEl) {
+    try {
+      var url = URL.createObjectURL(blob);
+      window.location.href = url;
+      statusEl.textContent = 'Сейчас откроется картинка на весь экран — нажмите и удерживайте её → «Добавить в Фото».';
+    } catch (err) {
+      statusEl.textContent = 'Не удалось открыть картинку. Сделайте скриншот экрана.';
+    }
   }
 
   function downloadBlob(blob, fileName, statusEl) {
@@ -167,8 +182,8 @@
       a.click();
       document.body.removeChild(a);
       setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
-      statusEl.textContent = isMobileOS()
-        ? 'Изображение скачано. На iPhone: нажмите и удерживайте картинку → «Добавить в Фото».'
+      statusEl.textContent = isAndroid()
+        ? 'Изображение скачано. Найдите его в уведомлениях или в галерее/загрузках.'
         : 'Изображение сохранено в папку «Загрузки».';
     } catch (err) {
       statusEl.textContent = 'Не удалось сохранить картинку в этом браузере. Сделайте скриншот экрана.';
@@ -223,11 +238,18 @@
 
         var blob = result.blob;
         var fileName = 'holiday-asia-' + currentNumber + '.png';
+
+        if (isIOS()) {
+          // На iPhone — всегда напрямую, без скачивания файла (см. пояснение выше).
+          openImageFullScreen(blob, statusEl);
+          return;
+        }
+
         var file = null;
         try { file = new File([blob], fileName, { type: 'image/png' }); } catch (err) { file = null; }
 
         var canUseShare = false;
-        if (isMobileOS()) {
+        if (isAndroid()) {
           try { canUseShare = !!(file && navigator.canShare && navigator.canShare({ files: [file] })); } catch (err) { canUseShare = false; }
         }
 
