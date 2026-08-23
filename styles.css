@@ -188,9 +188,12 @@ a{ color: inherit; }
 }
 .nav-card__icon{
   width: 56px; height: 56px;
+  box-sizing: border-box;
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  background: var(--cream-deep);
+  background: radial-gradient(circle at 32% 26%, #fdf6e3, #d9c48f 75%);
+  box-shadow: 0 6px 10px rgba(12,74,77,0.28), inset 0 2px 3px rgba(255,255,255,0.7);
+  border: 2px solid var(--teal-dark);
   color: var(--teal-dark);
 }
 .nav-card__icon svg{ width: 26px; height: 26px; }
