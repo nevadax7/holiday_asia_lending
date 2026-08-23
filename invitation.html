@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Приглашение — Holiday Asia</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="bg-layer" class="bg-layer" data-src="background.png"></div>
+
+<header class="site-header">
+  <div class="wrap site-header__row">
+    <a href="index.html" class="brand-logo-link">
+      <img id="brand-logo-img" class="brand-logo-img" data-src="logo.png" alt="IVC & HPA Holiday Asia" hidden>
+      <div id="brand-logo-fallback" class="brand-logo-fallback">
+        IVC&nbsp;&amp;&nbsp;HPA
+        <span>Holiday Asia</span>
+      </div>
+    </a>
+    <a href="index.html" class="back-link">← На главную</a>
+  </div>
+</header>
+
+<main class="page-content wrap">
+  <p class="page-subtitle" style="margin-top:1.5rem;">Приглашение</p>
+  <h1 class="invite-title">Holiday Asia</h1>
+
+  <div class="invite-media" id="invite-media" data-src="invitation.jpg">
+    <div class="invite-media__placeholder">Здесь появится изображение<br>приглашения (invitation.jpg)</div>
+  </div>
+
+  <div class="prose">
+    <p>В честь нового сотрудничества Holiday Asia и Naman Retreat мы приглашаем семейные пары на специальную клубную встречу в одном из лучших курортов побережья.</p>
+    <p>За 90 минут вы познакомитесь с курортом и откроете для себя новые возможности путешествий во Вьетнаме, Таиланде, на Канарских островах и в других популярных направлениях.</p>
+
+    <p class="gift-line">🎁 Ваш подарок за участие (на выбор):</p>
+    <ul class="terms-list">
+      <li>SPA для двоих</li>
+      <li>Романтический ужин</li>
+      <li>Вечерний круиз с шоу у моста Дракона</li>
+    </ul>
+
+    <p class="gift-line gift-line--main">⭐ Главный подарок программы — неделя проживания на одном из курортов нашей международной программы</p>
+
+    <h2>Для вашего удобства</h2>
+    <ul class="terms-list">
+      <li>Трансфер в обе стороны — за счёт компании.</li>
+      <li>Отдых на курорте: после встречи вы сможете провести время на территории Naman Retreat и отдохнуть на пляже.</li>
+    </ul>
+
+    <h2>Условия участия</h2>
+    <ul class="terms-list">
+      <li><strong>Кто может участвовать:</strong> семейные пары от 30 лет, отдыхающие в Дананге или Хойане.</li>
+      <li><strong>Получение подарка:</strong> одна пара может получить только один приз строго в день посещения компании.</li>
+      <li><strong>Правила:</strong> приз не подлежит обмену и не выплачивается в денежном эквиваленте.</li>
+    </ul>
+
+    <p style="text-align:center; color: var(--text-muted); font-size: 14px;">Участие только по предварительному приглашению. Количество мест ограничено.</p>
+  </div>
+
+  <div class="ticket-cta" id="ticket-cta">
+    <button type="button" class="btn-participate" id="participate-btn">Участвовать</button>
+  </div>
+
+  <div class="ticket-result" id="ticket-result" hidden>
+    <div class="ticket-card" id="ticket-card">
+      <p class="ticket-card__brand">Holiday Asia</p>
+      <p class="ticket-card__label">Ваш номер участника</p>
+      <p class="ticket-card__number" id="ticket-number">00000</p>
+      <p class="ticket-card__hint">Предъявите этот номер в офисе для регистрации и получения подарка</p>
+    </div>
+    <button type="button" class="btn-save" id="save-btn">Сохранить</button>
+    <p class="ticket-save-status" id="ticket-save-status"></p>
+  </div>
+
+  <canvas id="ticket-canvas" hidden></canvas>
+
+  <div style="text-align:center; margin-top: 2rem;">
+    <a href="index.html" class="back-link">← Назад</a>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <p class="site-footer__label">Мы в социальных сетях</p>
+  <div class="social-row">
+    <a class="social-icon" href="https://t.me/ivchpanews" target="_blank" rel="noopener" aria-label="Telegram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m21 4-3 16-6-4-3 3-1-6L21 4Z"/><path d="m8 13 10-8"/></svg>
+    </a>
+    <a class="social-icon" href="https://www.youtube.com/@IVCHPAFamilyTravelClub/shorts" target="_blank" rel="noopener" aria-label="YouTube">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="m10.5 9.5 4.5 2.5-4.5 2.5v-5Z" fill="currentColor" stroke="none"/></svg>
+    </a>
+    <a class="social-icon" href="https://www.instagram.com/ivchpa/" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="3.6"/><circle cx="17" cy="7" r="1" fill="currentColor" stroke="none"/></svg>
+    </a>
+  </div>
+  <p class="site-footer__copy">© Holiday Asia Co LTD</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
