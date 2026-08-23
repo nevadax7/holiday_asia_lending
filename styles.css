@@ -1,0 +1,566 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Playfair+Display:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
+
+:root{
+  --cream: #f8f2e4;
+  --cream-deep: #efe3c9;
+  --teal-dark: #0c4a4d;
+  --teal: #136d6f;
+  --teal-light: #4f9d97;
+  --gold: #c9a24a;
+  --gold-light: #e7d7a8;
+  --text-dark: #2b241a;
+  --text-muted: rgba(43,36,26,0.76);
+  --text-soft: rgba(43,36,26,0.60);
+  --border: rgba(43,36,26,0.14);
+  --white: #fffdf8;
+
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+
+  --shadow-sm: 0 4px 16px rgba(43,36,26,0.08);
+  --shadow-md: 0 14px 40px rgba(43,36,26,0.14);
+
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-brand: 'Cinzel', 'Playfair Display', Georgia, serif;
+  --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+*{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+body{
+  margin: 0;
+  background: var(--cream);
+  color: var(--text-dark);
+  font-family: var(--font-sans);
+  font-weight: 500;
+  line-height: 1.65;
+}
+img{ max-width: 100%; display: block; }
+a{ color: inherit; }
+
+.wrap{
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ---------- background photo layer ---------- */
+.bg-layer{
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-size: cover;
+  background-position: center;
+  filter: blur(3px) brightness(0.92) saturate(1.05);
+  transform: scale(1.06);
+}
+.bg-layer::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(248,242,228,0.35), rgba(248,242,228,0.55));
+}
+.bg-layer--placeholder{
+  background-image: radial-gradient(circle at 20% 15%, rgba(79,157,151,0.25), transparent 55%),
+    radial-gradient(circle at 85% 80%, rgba(201,162,74,0.22), transparent 55%),
+    linear-gradient(160deg, #efe7d2, #e8dcc0);
+}
+
+/* ---------- ampersand: same color/weight as surrounding heading, just extra breathing room ---------- */
+.amp{
+  padding: 0 0.08em;
+}
+
+/* ---------- header ---------- */
+.site-header{
+  padding: 1.5rem 0 0;
+}
+.site-header__row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.brand-logo-link{ display: inline-flex; align-items: center; }
+.brand-logo-img{ height: 64px; width: auto; }
+.brand-logo-fallback{
+  font-family: var(--font-brand);
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: 0.03em;
+  color: var(--teal-dark);
+  line-height: 1.1;
+}
+.brand-logo-fallback span{
+  display: block;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 4px;
+}
+
+.back-link{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--teal-dark);
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--white);
+  transition: border-color 160ms ease, transform 160ms ease;
+}
+.back-link:hover{ border-color: var(--gold); transform: translateX(-2px); }
+
+/* ---------- hero / main nav buttons ---------- */
+.hero{
+  padding: 3rem 0 2.5rem;
+  text-align: center;
+}
+.hero__eyebrow{
+  margin: 0 0 10px;
+  font-size: 13px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+}
+.hero__title{
+  margin: 0 0 18px;
+  font-family: var(--font-brand);
+  font-weight: 700;
+  font-size: clamp(34px, 5.4vw, 56px);
+  letter-spacing: 0.05em;
+  color: var(--teal-dark);
+}
+.hero__subtitle{
+  max-width: 640px;
+  margin: 0 auto;
+  color: var(--text-muted);
+  font-size: 16px;
+}
+
+.nav-cards{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+.nav-card{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 2.25rem 1.5rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  color: var(--text-dark);
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+.nav-card:hover{
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--gold);
+}
+.nav-card__icon{
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--cream-deep);
+  color: var(--teal-dark);
+}
+.nav-card__icon svg{ width: 26px; height: 26px; }
+.nav-card__label{
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--teal-dark);
+}
+.nav-card__hint{
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+@media (max-width: 760px){
+  .nav-cards{ grid-template-columns: 1fr; }
+}
+
+/* ---------- page content (about / resorts / invitation) ---------- */
+.page-content{
+  padding: 1rem 0 4rem;
+}
+.page-title{
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(28px, 4vw, 40px);
+  color: var(--teal-dark);
+  margin: 1.5rem 0 0.5rem;
+  text-align: center;
+}
+.page-subtitle{
+  text-align: center;
+  color: var(--gold);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 0 0 2.5rem;
+}
+
+.prose{
+  max-width: 760px;
+  margin: 0 auto;
+  font-size: 16px;
+  color: var(--text-dark);
+}
+.prose p{ margin: 0 0 1.1em; }
+.prose h2{
+  font-family: var(--font-display);
+  color: var(--teal-dark);
+  font-size: 24px;
+  margin: 2.2em 0 0.8em;
+}
+.prose h2:first-child{ margin-top: 0; }
+
+.stat-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0 2rem;
+}
+.stat-card{
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.4rem 1rem;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+.stat-card__num{
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 30px;
+  color: var(--teal-dark);
+  line-height: 1;
+}
+.stat-card__label{
+  margin-top: 8px;
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.35;
+}
+
+.advantage-list{
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 2rem;
+  display: grid;
+  gap: 14px;
+}
+.advantage-list li{
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.1rem 1.3rem;
+  box-shadow: var(--shadow-sm);
+}
+.advantage-list__icon{
+  flex-shrink: 0;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--cream-deep);
+  color: var(--teal-dark);
+  display: flex; align-items: center; justify-content: center;
+}
+.advantage-list__icon svg{ width: 18px; height: 18px; }
+.advantage-list strong{ color: var(--teal-dark); }
+
+.callout{
+  margin: 2rem 0;
+  padding: 1.75rem 2rem;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(160deg, var(--teal-dark), var(--teal));
+  color: var(--white);
+  box-shadow: var(--shadow-md);
+}
+.callout__eyebrow{
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  font-weight: 600;
+  margin: 0 0 6px;
+}
+.callout p{ margin: 0; opacity: 0.92; }
+
+/* ---------- resorts page ---------- */
+.resort-country{ margin: 0 0 2.75rem; }
+.resort-country__title{
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--teal-dark);
+  border-bottom: 2px solid var(--gold-light);
+  padding-bottom: 10px;
+  margin: 0 0 1.25rem;
+}
+.resort-region{ margin: 0 0 1.5rem; }
+.resort-region__city{
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 10px;
+}
+.resort-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+.resort-card{
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.resort-card__media{
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(160deg, var(--teal-light), var(--teal-dark));
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.85);
+}
+.resort-card__media svg{ width: 30%; height: 30%; }
+.resort-card__body{ padding: 1rem 1.1rem; }
+.resort-card__name{
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--teal-dark);
+  margin: 0 0 4px;
+}
+.resort-card__note{
+  font-size: 12.5px;
+  color: var(--text-soft);
+  margin: 0;
+}
+
+/* ---------- invitation page ---------- */
+.invite-title{
+  text-align: center;
+  font-family: var(--font-brand);
+  font-weight: 700;
+  font-size: clamp(40px, 7.4vw, 68px);
+  letter-spacing: 0.05em;
+  color: var(--teal-dark);
+  margin: 1rem 0 2rem;
+}
+.invite-media{
+  max-width: 760px;
+  margin: 0 auto 2.5rem;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+}
+.invite-media__placeholder{
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(160deg, var(--teal-light), var(--teal-dark));
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.85);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 1rem;
+}
+
+.terms-list{
+  margin: 0.5em 0 1.3em;
+  padding-left: 1.2em;
+}
+.terms-list li{ margin-bottom: 6px; }
+
+.gift-line{
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--teal-dark);
+  text-align: center;
+  margin: 1.5em 0 0.6em;
+}
+.gift-line--main{
+  color: var(--gold);
+}
+
+/* ---------- invitation: participate + ticket ---------- */
+.ticket-cta{
+  text-align: center;
+  margin: 2.5rem 0 1rem;
+}
+.btn-participate{
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: linear-gradient(160deg, var(--teal), var(--teal-dark));
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  padding: 16px 40px;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.btn-participate:hover{ transform: translateY(-2px); }
+.btn-participate:active{ transform: translateY(0) scale(0.98); }
+
+.ticket-result{
+  text-align: center;
+  margin: 2rem auto 1rem;
+  max-width: 560px;
+}
+.ticket-card{
+  background: var(--cream-deep);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 1.5rem;
+  box-shadow: var(--shadow-md);
+}
+.ticket-card__brand{
+  font-family: var(--font-brand);
+  font-size: 20px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teal-dark);
+  margin: 0 0 1.25rem;
+  text-align: center;
+}
+.ticket-card__columns{
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+.ticket-card__col{
+  flex: 1;
+  min-width: 0;
+  padding: 0 16px;
+}
+.ticket-card__divider{
+  width: 1px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+.ticket-card__label{
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin: 0 0 10px;
+}
+.ticket-card__number{
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: clamp(30px, 8vw, 40px);
+  letter-spacing: 0.03em;
+  color: var(--teal-dark);
+  margin: 0;
+}
+.ticket-card__hint{
+  font-size: 14px;
+  color: var(--text-dark);
+  margin: 0;
+  line-height: 1.5;
+  text-align: left;
+}
+@media (max-width: 480px){
+  .ticket-card__columns{ flex-direction: column; gap: 18px; }
+  .ticket-card__divider{ display: none; }
+  .ticket-card__col{ padding: 0; text-align: center; }
+  .ticket-card__hint{ text-align: center; }
+}
+
+.btn-save{
+  margin-top: 1.4rem;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--teal-dark);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 13px 32px;
+  cursor: pointer;
+  transition: border-color 160ms ease, transform 160ms ease;
+}
+.btn-save:hover{ border-color: var(--gold); transform: translateY(-2px); }
+.btn-save:active{ transform: translateY(0) scale(0.98); }
+
+.ticket-save-status{
+  margin: 10px 0 0;
+  font-size: 12.5px;
+  color: var(--text-muted);
+  min-height: 1.2em;
+}
+
+/* ---------- footer ---------- */
+.site-footer{
+  padding: 2.5rem 0 3rem;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  margin-top: 2rem;
+}
+.site-footer__label{
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  margin: 0 0 1rem;
+}
+.social-row{
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+.social-icon{
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--white);
+  border: 1px solid var(--border);
+  color: var(--teal-dark);
+  text-decoration: none;
+  transition: transform 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+.social-icon svg{ width: 20px; height: 20px; }
+.social-icon:hover{
+  transform: translateY(-3px);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.site-footer__copy{
+  margin: 1.5rem 0 0;
+  font-size: 12px;
+  color: var(--text-soft);
+}
