@@ -73,13 +73,22 @@
     return digits;
   }
 
-  function drawTicketCanvas(number, callback) {
-    var canvas = document.getElementById('ticket-canvas');
-    if (!canvas) { callback(null); return; }
-    var ctx = canvas.getContext('2d');
+  // Шаблон грузим ЗАРАНЕЕ (как только открылась страница), а не в момент
+  // клика по "Сохранить" — иначе пока грузится картинка 1-2МБ, браузер может
+  // решить, что клик пользователя "устарел", и молча заблокировать окно
+  // "Поделиться/Сохранить" без единой ошибки на экране.
+  var preloadedTemplateImg = null;
+  var preloadedTemplateFailed = false;
 
+  function preloadTicketTemplate() {
     var img = new Image();
-    img.onload = function () {
+    img.onload = function () { preloadedTemplateImg = img; };
+    img.onerror = function () { preloadedTemplateFailed = true; };
+    img.src = TICKET_TEMPLATE_SRC;
+  }
+
+  function paintTicketImage(canvas, ctx, img, number, callback) {
+    try {
       var W = img.naturalWidth;
       var H = img.naturalHeight;
       canvas.width = W;
@@ -104,15 +113,62 @@
 
       ctx.fillText(number, centerX, centerY);
 
-      canvas.toBlob(function (blob) { callback(blob); }, 'image/png');
+      canvas.toBlob(function (blob) {
+        if (!blob) { callback({ error: 'toblob-failed' }); return; }
+        callback({ blob: blob });
+      }, 'image/png');
+    } catch (err) {
+      callback({ error: 'draw-exception' });
+    }
+  }
+
+  function drawTicketCanvas(number, callback) {
+    var canvas = document.getElementById('ticket-canvas');
+    if (!canvas) { callback({ error: 'no-canvas' }); return; }
+    var ctx = canvas.getContext('2d');
+
+    if (preloadedTemplateImg) {
+      paintTicketImage(canvas, ctx, preloadedTemplateImg, number, callback);
+      return;
+    }
+    if (preloadedTemplateFailed) {
+      callback({ error: 'template-missing' });
+      return;
+    }
+    // Заранее загрузить не успело — пробуем ещё раз прямо сейчас.
+    var img = new Image();
+    img.onload = function () {
+      preloadedTemplateImg = img;
+      paintTicketImage(canvas, ctx, img, number, callback);
     };
-    img.onerror = function () { callback(null); };
+    img.onerror = function () {
+      preloadedTemplateFailed = true;
+      callback({ error: 'template-missing' });
+    };
     img.src = TICKET_TEMPLATE_SRC;
+  }
+
+  function downloadBlob(blob, fileName, statusEl) {
+    try {
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+      statusEl.textContent = 'Изображение скачано. На iPhone: нажмите и удерживайте картинку → «Добавить в Фото».';
+    } catch (err) {
+      statusEl.textContent = 'Не удалось сохранить картинку в этом браузере. Сделайте скриншот экрана.';
+    }
   }
 
   function setupInvitationTicket() {
     var participateBtn = document.getElementById('participate-btn');
     if (!participateBtn) return;
+
+    preloadTicketTemplate();
 
     var ctaBlock = document.getElementById('ticket-cta');
     var resultBlock = document.getElementById('ticket-result');
@@ -133,29 +189,44 @@
       if (!currentNumber) return;
       statusEl.textContent = 'Готовим изображение…';
 
-      drawTicketCanvas(currentNumber, function (blob) {
-        if (!blob) {
-          statusEl.textContent = 'Не найден файл ticket-template.png в папке сайта — загрузите его и попробуйте снова.';
+      var settled = false;
+      var timeoutId = setTimeout(function () {
+        if (settled) return;
+        settled = true;
+        statusEl.textContent = 'Не получилось подготовить картинку (слишком долго). Проверьте интернет и нажмите «Сохранить» ещё раз.';
+      }, 10000);
+
+      drawTicketCanvas(currentNumber, function (result) {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timeoutId);
+
+        if (result.error) {
+          if (result.error === 'template-missing') {
+            statusEl.textContent = 'Не найден файл ticket-template.png в папке сайта — загрузите его и попробуйте снова.';
+          } else {
+            statusEl.textContent = 'Не удалось подготовить картинку. Попробуйте ещё раз.';
+          }
           return;
         }
+
+        var blob = result.blob;
         var fileName = 'holiday-asia-' + currentNumber + '.png';
         var file = null;
         try { file = new File([blob], fileName, { type: 'image/png' }); } catch (err) { file = null; }
 
-        if (file && navigator.canShare && navigator.canShare({ files: [file] })) {
+        var canUseShare = false;
+        try { canUseShare = !!(file && navigator.canShare && navigator.canShare({ files: [file] })); } catch (err) { canUseShare = false; }
+
+        if (canUseShare) {
           navigator.share({ files: [file], title: 'Holiday Asia' })
             .then(function () { statusEl.textContent = 'Готово!'; })
-            .catch(function () { statusEl.textContent = ''; });
+            .catch(function (err) {
+              if (err && err.name === 'AbortError') { statusEl.textContent = ''; return; }
+              downloadBlob(blob, fileName, statusEl);
+            });
         } else {
-          var url = URL.createObjectURL(blob);
-          var a = document.createElement('a');
-          a.href = url;
-          a.download = fileName;
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
-          statusEl.textContent = 'Изображение скачано. На iPhone: нажмите и удерживайте картинку → «Добавить в Фото».';
+          downloadBlob(blob, fileName, statusEl);
         }
       });
     });
