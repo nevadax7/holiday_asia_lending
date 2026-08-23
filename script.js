@@ -59,9 +59,10 @@
   // (0..1), чтобы работать на любом реальном размере файла. Если после
   // сохранения номер окажется не совсем на своём месте — присылайте
   // скриншот результата, эти четыре числа поправляются за одну правку.
-  var TICKET_NUMBER_X_FRAC = 0.28;   // по горизонтали: центр под "ВАШ НОМЕР УЧАСТНИКА"
-  var TICKET_NUMBER_Y_FRAC = 0.80;   // по вертикали
-  var TICKET_NUMBER_MAX_WIDTH_FRAC = 0.34; // не шире левой колонки
+  var TICKET_NUMBER_X_FRAC = 0.30;   // по горизонтали: центр под "ВАШ НОМЕР УЧАСТНИКА"
+  var TICKET_NUMBER_Y_FRAC = 0.805;  // по вертикали
+  var TICKET_NUMBER_MAX_WIDTH_FRAC = 0.36; // не шире левой колонки
+  var TICKET_NUMBER_FONT_SIZE_FRAC = 0.078; // крупнее прежнего (было 0.062)
   var TICKET_NUMBER_COLOR = '#0c4a4d'; // тот же цвет, что и "HOLIDAY ASIA" на карточке
 
   function generateTicketNumber() {
@@ -103,7 +104,7 @@
       ctx.textBaseline = 'middle';
       ctx.fillStyle = TICKET_NUMBER_COLOR;
 
-      var fontSize = Math.round(W * 0.062);
+      var fontSize = Math.round(W * TICKET_NUMBER_FONT_SIZE_FRAC);
       var fits = false;
       while (!fits && fontSize > 20) {
         ctx.font = '800 ' + fontSize + 'px Inter, Arial, sans-serif';
@@ -148,6 +149,14 @@
     img.src = TICKET_TEMPLATE_SRC;
   }
 
+  // Настоящее мобильное устройство (iOS/Android) — только там системное окно
+  // "Поделиться" реально предлагает пункт "Сохранить изображение"/"В Фото".
+  // На компьютере (Mac/Windows/Linux) в этом окне такого пункта нет вообще —
+  // там сразу скачиваем файл обычным способом, в папку "Загрузки".
+  function isMobileOS() {
+    return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  }
+
   function downloadBlob(blob, fileName, statusEl) {
     try {
       var url = URL.createObjectURL(blob);
@@ -158,7 +167,9 @@
       a.click();
       document.body.removeChild(a);
       setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
-      statusEl.textContent = 'Изображение скачано. На iPhone: нажмите и удерживайте картинку → «Добавить в Фото».';
+      statusEl.textContent = isMobileOS()
+        ? 'Изображение скачано. На iPhone: нажмите и удерживайте картинку → «Добавить в Фото».'
+        : 'Изображение сохранено в папку «Загрузки».';
     } catch (err) {
       statusEl.textContent = 'Не удалось сохранить картинку в этом браузере. Сделайте скриншот экрана.';
     }
@@ -216,7 +227,9 @@
         try { file = new File([blob], fileName, { type: 'image/png' }); } catch (err) { file = null; }
 
         var canUseShare = false;
-        try { canUseShare = !!(file && navigator.canShare && navigator.canShare({ files: [file] })); } catch (err) { canUseShare = false; }
+        if (isMobileOS()) {
+          try { canUseShare = !!(file && navigator.canShare && navigator.canShare({ files: [file] })); } catch (err) { canUseShare = false; }
+        }
 
         if (canUseShare) {
           navigator.share({ files: [file], title: 'Holiday Asia' })
