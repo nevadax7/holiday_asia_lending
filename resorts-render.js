@@ -9,6 +9,12 @@
     return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 12a8 8 0 0 1 16 0z"/><path d="M12 12v8"/><path d="M9 20c1-1 2-1 3 0s2 1 3 0"/></svg>';
   }
 
+  function withVersion(src) {
+    var v = window.RESORTS_ASSET_VERSION;
+    if (!v) return src;
+    return src + (src.indexOf('?') === -1 ? '?' : '&') + 'v=' + encodeURIComponent(v);
+  }
+
   function testImage(src) {
     return new Promise(function (resolve) {
       var img = new Image();
@@ -139,7 +145,7 @@
     function show(index) {
       var len = images.length;
       currentIndex = ((index % len) + len) % len;
-      imgEl.src = images[currentIndex];
+      imgEl.src = withVersion(images[currentIndex]);
       imgEl.alt = altBase + ' — фотография ' + (currentIndex + 1);
       counterEl.textContent = (currentIndex + 1) + ' / ' + len;
     }
@@ -214,10 +220,11 @@
 
       var heroSrc = hotel.images && hotel.images[0];
       if (heroSrc) {
-        testImage(heroSrc).then(function (ok) {
+        var heroSrcVersioned = withVersion(heroSrc);
+        testImage(heroSrcVersioned).then(function (ok) {
           if (ok) {
             var img = document.createElement('img');
-            img.src = heroSrc;
+            img.src = heroSrcVersioned;
             img.alt = hotel.name;
             img.loading = 'lazy';
             media.innerHTML = '';
@@ -293,10 +300,11 @@
     function makeSlot(el, index) {
       var src = images[index];
       if (!src) { makePlaceholder(el); return; }
-      testImage(src).then(function (ok) {
+      var srcVersioned = withVersion(src);
+      testImage(srcVersioned).then(function (ok) {
         if (!ok) { makePlaceholder(el); return; }
         var img = document.createElement('img');
-        img.src = src;
+        img.src = srcVersioned;
         img.alt = hotel.name + ' — фотография ' + (index + 1);
         if (index > 0) img.loading = 'lazy';
         el.innerHTML = '';
