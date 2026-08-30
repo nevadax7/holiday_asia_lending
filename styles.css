@@ -686,6 +686,9 @@ body.lightbox-open{ overflow: hidden; }
   box-shadow: var(--shadow-md);
   border: 1px solid var(--border);
 }
+.invite-media--clickable{ cursor: pointer; }
+.invite-media--clickable:hover img{ opacity: 0.9; }
+.invite-media--clickable:active img{ opacity: 0.75; }
 .invite-media__placeholder{
   aspect-ratio: 16 / 9;
   background: linear-gradient(160deg, var(--teal-light), var(--teal-dark));
