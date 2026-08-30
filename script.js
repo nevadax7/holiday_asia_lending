@@ -26,6 +26,56 @@
     });
   }
 
+    // Простой полноэкранный просмотр одной картинки — переиспользует те же
+  // CSS-классы, что и лайтбокс фото отелей в resorts-render.js, но без
+  // стрелок/счётчика (тут всего одно изображение). Картинка открывается
+  // как обычный <img>, поэтому на телефоне доступно "нажать и удерживать →
+  // Сохранить изображение", а на компьютере — клик правой кнопкой мыши.
+  function openSimpleLightbox(src, alt) {
+    var overlay = document.createElement('div');
+    overlay.className = 'lightbox-overlay';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+
+    var closeBtn = document.createElement('button');
+    closeBtn.type = 'button';
+    closeBtn.className = 'lightbox-close';
+    closeBtn.setAttribute('aria-label', 'Закрыть просмотр');
+    closeBtn.innerHTML = '&times;';
+
+    var inner = document.createElement('div');
+    inner.className = 'lightbox-inner';
+
+    var img = document.createElement('img');
+    img.className = 'lightbox-image';
+    img.src = src;
+    img.alt = alt || '';
+    inner.appendChild(img);
+
+    overlay.appendChild(closeBtn);
+    overlay.appendChild(inner);
+
+    function close() {
+      overlay.classList.remove('is-visible');
+      document.body.classList.remove('lightbox-open');
+      document.removeEventListener('keydown', onKeydown);
+      setTimeout(function () { overlay.remove(); }, 200);
+    }
+    function onKeydown(e) {
+      if (e.key === 'Escape') close();
+    }
+
+    closeBtn.addEventListener('click', close);
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) close();
+    });
+    document.addEventListener('keydown', onKeydown);
+
+    document.body.classList.add('lightbox-open');
+    document.body.appendChild(overlay);
+    requestAnimationFrame(function () { overlay.classList.add('is-visible'); });
+  }
+
   function resolveInviteImage() {
     var wrap = document.getElementById('invite-media');
     if (!wrap) return;
@@ -33,6 +83,15 @@
     testImage(src).then(function (ok) {
       if (ok) {
         wrap.innerHTML = '<img src="' + src + '" alt="Приглашение Naman Retreat">';
+        wrap.classList.add('invite-media--clickable');
+        wrap.setAttribute('role', 'button');
+        wrap.setAttribute('tabindex', '0');
+        wrap.setAttribute('aria-label', 'Открыть изображение приглашения на весь экран');
+        var openThis = function () { openSimpleLightbox(src, 'Приглашение Naman Retreat'); };
+        wrap.addEventListener('click', openThis);
+        wrap.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openThis(); }
+        });
       }
     });
   }
