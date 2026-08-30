@@ -170,6 +170,25 @@
     return { open: open };
   })();
 
+  // ---------- resorts.html: обложки стран в сетке направлений ----------
+  function renderCountryCovers() {
+    var medias = document.querySelectorAll('.country-card__media[data-cover]');
+    medias.forEach(function (media) {
+      var src = withVersion(media.getAttribute('data-cover'));
+      testImage(src).then(function (ok) {
+        if (!ok) return;
+        var img = document.createElement('img');
+        img.src = src;
+        img.alt = media.getAttribute('aria-label') || '';
+        img.loading = 'lazy';
+        media.innerHTML = '';
+        media.removeAttribute('role');
+        media.removeAttribute('aria-label');
+        media.appendChild(img);
+      });
+    });
+  }
+
   // ---------- resort-country.html: список отелей выбранной страны ----------
   function renderCountryPage() {
     var gridEl = document.getElementById('hotel-grid');
@@ -334,6 +353,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
+    renderCountryCovers();
     renderCountryPage();
     renderHotelPage();
   });
