@@ -550,6 +550,7 @@ body.lightbox-open{ overflow: hidden; }
   transition: opacity 200ms ease;
 }
 .lightbox-overlay.is-visible{ opacity: 1; }
+.lightbox-overlay[hidden]{ display: none; }
 .lightbox-inner{
   max-width: 95vw;
   max-height: 90vh;
