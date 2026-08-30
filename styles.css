@@ -230,7 +230,8 @@ a{ color: inherit; }
 
 /* ---------- page content (about / resorts / invitation) ---------- */
 .page-content{
-  padding: 1rem 0 4rem;
+  padding-top: 1rem;
+  padding-bottom: 4rem;
 }
 .page-title{
   font-family: var(--font-display);
