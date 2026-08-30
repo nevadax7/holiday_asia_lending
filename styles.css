@@ -366,58 +366,142 @@ a{ color: inherit; }
 }
 .callout p{ margin: 0; opacity: 0.92; }
 
-/* ---------- resorts page ---------- */
-.resort-country{ margin: 0 0 2.75rem; }
-.resort-country__title{
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 22px;
-  color: var(--teal-dark);
-  border-bottom: 2px solid var(--gold-light);
-  padding-bottom: 10px;
-  margin: 0 0 1.25rem;
-}
-.resort-region{ margin: 0 0 1.5rem; }
-.resort-region__city{
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin: 0 0 10px;
-}
-.resort-grid{
+/* ---------- resorts: countries grid ---------- */
+.country-grid{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin: 2rem 0;
 }
-.resort-card{
+@media (max-width: 900px){ .country-grid{ grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px){ .country-grid{ grid-template-columns: 1fr; } }
+
+.country-card{
+  display: block;
+  text-decoration: none;
+  color: var(--text-dark);
   background: var(--white);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
 }
-.resort-card__media{
+.country-card:hover{
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--gold);
+}
+.country-card__media{
   aspect-ratio: 4 / 3;
   background: linear-gradient(160deg, var(--teal-light), var(--teal-dark));
   display: flex; align-items: center; justify-content: center;
   color: rgba(255,255,255,0.85);
 }
-.resort-card__media svg{ width: 30%; height: 30%; }
-.resort-card__body{ padding: 1rem 1.1rem; }
-.resort-card__name{
+.country-card__media svg{ width: 30%; height: 30%; }
+.country-card__name{
+  padding: 1rem 1.1rem;
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 800;
+  font-size: 19px;
+  color: var(--teal-dark);
+  text-align: center;
+}
+
+/* ---------- resorts: hotels grid (resort-country.html) ---------- */
+.hotel-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin: 2rem 0;
+}
+@media (max-width: 900px){ .hotel-grid{ grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px){ .hotel-grid{ grid-template-columns: 1fr; } }
+
+.hotel-card{
+  display: block;
+  text-decoration: none;
+  color: var(--text-dark);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+.hotel-card:hover{
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--gold);
+}
+.hotel-card__media{
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(160deg, var(--teal-light), var(--teal-dark));
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.85);
+}
+.hotel-card__media svg{ width: 30%; height: 30%; }
+.hotel-card__body{ padding: 1rem 1.1rem; }
+.hotel-card__name{
+  font-family: var(--font-display);
+  font-weight: 800;
   font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
   color: var(--teal-dark);
   margin: 0 0 4px;
 }
-.resort-card__note{
+.hotel-card__location{
   font-size: 13px;
   font-weight: 500;
   color: var(--text-soft);
   margin: 0;
+}
+
+/* ---------- resorts: hotel detail gallery (resort-hotel.html) ---------- */
+#hotel-name{ text-transform: uppercase; }
+.hotel-gallery{
+  max-width: 960px;
+  margin: 0 auto 2rem;
+}
+.hotel-gallery__main{
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: linear-gradient(160deg, var(--teal-light), var(--teal-dark));
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 10px;
+}
+.hotel-gallery__main svg{ width: 20%; height: 20%; }
+.hotel-gallery__thumbs{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.hotel-gallery__thumb{
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: linear-gradient(160deg, var(--teal-light), var(--teal-dark));
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.8);
+}
+.hotel-gallery__thumb svg{ width: 30%; height: 30%; }
+
+@media (max-width: 640px){
+  .hotel-gallery__thumbs{
+    display: flex;
+    grid-template-columns: none;
+    overflow-x: auto;
+    gap: 8px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .hotel-gallery__thumb{
+    flex: 0 0 32%;
+    scroll-snap-align: start;
+  }
 }
 
 /* ---------- invitation page ---------- */
