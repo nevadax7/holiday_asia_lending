@@ -46,7 +46,7 @@ window.RESORTS_DATA = {
       {
         slug: "veranda-residence-pattaya",
         name: "Veranda Residence Pattaya",
-        location: "Na Jomtien, Паттайя, Таиланд",
+        location: "Паттайя, Таиланд",
         images: [
           "assets/resorts/thailand/veranda-residence-pattaya/1.jpg",
           "assets/resorts/thailand/veranda-residence-pattaya/2.jpg",
