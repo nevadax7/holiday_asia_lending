@@ -523,7 +523,29 @@ a{ color: inherit; }
 }
 
 /* ---------- resorts: hotel detail gallery (resort-hotel.html) ---------- */
-#hotel-name{ text-transform: uppercase; }
+.hotel-title-row{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 1.5rem;
+}
+#hotel-name{ text-transform: uppercase; margin-top: 0; }
+.hotel-stars{
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+.hotel-star{
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 2px rgba(124,95,34,0.45));
+}
+@media (max-width: 480px){
+  .hotel-star{ width: 20px; height: 20px; }
+}
 .hotel-gallery{
   max-width: 960px;
   margin: 0 auto 2rem;
