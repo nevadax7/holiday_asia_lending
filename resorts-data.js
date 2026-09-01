@@ -11,6 +11,7 @@ window.RESORTS_DATA = {
         slug: "view-talay-villas",
         name: "View Talay Pattaya",
         location: "Паттайя, Таиланд",
+        stars: 4,
         images: [
           "assets/resorts/thailand/view-talay-villas/1.jpg",
           "assets/resorts/thailand/view-talay-villas/2.jpg",
@@ -18,7 +19,7 @@ window.RESORTS_DATA = {
           "assets/resorts/thailand/view-talay-villas/4.jpg",
           "assets/resorts/thailand/view-talay-villas/5.jpg"
         ],
-                description: [
+        description: [
           { type: "p", text: "View Talay Pattaya — популярный комплекс клубных апартаментов в одном из самых привлекательных курортных районов Паттайи - Jomtien Beach. Комплексы расположены в удобных локациях рядом с морем, пляжами, ресторанами, торговыми центрами и основными туристическими достопримечательностями города." },
           { type: "p", text: "Просторные апартаменты подходят как для семейного отдыха, так и для путешествий вдвоём. Гости получают больше пространства и свободы, чем в классическом гостиничном номере: собственная зона отдыха, оборудованная кухня и всё необходимое для комфортного проживания." },
           { type: "p", text: "На территории комплексов предусмотрены бассейны, зоны отдыха и развитая инфраструктура, а удачное расположение позволяет легко сочетать пляжный отдых, прогулки, развлечения и знакомство с Паттайей." },
@@ -49,6 +50,7 @@ window.RESORTS_DATA = {
         slug: "veranda-residence-pattaya",
         name: "Veranda Residence Pattaya",
         location: "Паттайя, Таиланд",
+        stars: 5,
         images: [
           "assets/resorts/thailand/veranda-residence-pattaya/1.jpg",
           "assets/resorts/thailand/veranda-residence-pattaya/2.jpg",
@@ -99,6 +101,7 @@ window.RESORTS_DATA = {
         slug: "grand-howard-hotel",
         name: "Grand Howard Hotel",
         location: "Бангкок, Таиланд",
+        stars: 5,
         images: [
           "assets/resorts/thailand/grand-howard-hotel/1.jpg",
           "assets/resorts/thailand/grand-howard-hotel/2.jpg",
@@ -145,6 +148,7 @@ window.RESORTS_DATA = {
         slug: "klong-prao-resort",
         name: "Klong Prao Resort",
         location: "о. Ко Чанг, Таиланд",
+        stars: 4,
         images: [
           "assets/resorts/thailand/klong-prao-resort/1.jpg",
           "assets/resorts/thailand/klong-prao-resort/2.jpg",
@@ -153,7 +157,7 @@ window.RESORTS_DATA = {
           "assets/resorts/thailand/klong-prao-resort/5.jpg"
         ],
         description: [
-          { type: "p", text: "Это популярный 3-звёздочный курортный отель, расположенный на первой береговой линии одного из лучших пляжей острова Ко Чанг — Клонг Прао." },
+          { type: "p", text: "Это популярный 4-звёздочный курортный отель, расположенный на первой береговой линии одного из лучших пляжей острова Ко Чанг — Клонг Прао." },
           { type: "p", text: "Отель выделяется большой зелёной территорией с естественной лагуной и живописными мостиками." },
           { type: "h2", text: "Территория и расположение" },
           { type: "ul", items: [
@@ -190,6 +194,7 @@ window.RESORTS_DATA = {
         slug: "mercure-koh-chang-hideaway",
         name: "Mercure Koh Chang Hideaway",
         location: "о. Ко Чанг, Таиланд",
+        stars: 4,
         images: [
           "assets/resorts/thailand/mercure-koh-chang-hideaway/1.jpg",
           "assets/resorts/thailand/mercure-koh-chang-hideaway/2.jpg",
@@ -242,6 +247,7 @@ window.RESORTS_DATA = {
         slug: "wyndham-royalbeach-resort",
         name: "Wyndham RoyalBeach Resort",
         location: "Хойан, Дананг, Вьетнам",
+        stars: 5,
         images: [
           "assets/resorts/vietnam/wyndham-royalbeach-resort/1.jpg",
           "assets/resorts/vietnam/wyndham-royalbeach-resort/2.jpg",
@@ -274,6 +280,7 @@ window.RESORTS_DATA = {
         slug: "naman-retreat",
         name: "Naman Retreat",
         location: "Дананг, Вьетнам",
+        stars: 5,
         images: [
           "assets/resorts/vietnam/naman-retreat/1.jpg",
           "assets/resorts/vietnam/naman-retreat/2.jpg",
@@ -284,7 +291,7 @@ window.RESORTS_DATA = {
         description: [
           { type: "p", text: "Naman Retreat — тихий и уютный курорт в Дананге, расположенный напротив полей для гольфа Montgomerie Links Vietnam. Комплекс сочетает виллы с частными бассейнами, собственный пляж и насыщенную велнес-программу." },
           { type: "h2", text: "Расположение" },
-                    { type: "p", text: "Комплекс расположен в живописной курортной зоне Дананга на первой береговой линии. До пляжа Нон-Нуок — около 4,2 км, до знаменитых Мраморных гор Нгу-Ханх-Сон — около 5 км." },
+          { type: "p", text: "Комплекс расположен в живописной курортной зоне Дананга на первой береговой линии. До пляжа Нон-Нуок — около 4,2 км, до знаменитых Мраморных гор Нгу-Ханх-Сон — около 5 км." },
           { type: "p", text: "Международный аэропорт Дананга находится примерно в 19 км, что делает дорогу до комплекса достаточно быстрой и комфортной." },
           { type: "p", text: "Удобное расположение позволяет сочетать пляжный отдых, прогулки, знакомство с достопримечательностями Дананга и поездки в атмосферный старинный город Хойан." },
           { type: "h2", text: "Номера и виллы" },
@@ -307,6 +314,7 @@ window.RESORTS_DATA = {
         slug: "carinae-hotel",
         name: "Carinae Hotel",
         location: "Дананг, Вьетнам",
+        stars: 4,
         images: [
           "assets/resorts/vietnam/carinae-hotel/1.jpg",
           "assets/resorts/vietnam/carinae-hotel/2.jpg",
@@ -338,6 +346,7 @@ window.RESORTS_DATA = {
         slug: "peninsula-danang",
         name: "Peninsula Danang",
         location: "Дананг, Вьетнам",
+        stars: 5,
         images: [
           "assets/resorts/vietnam/peninsula-danang/1.jpg",
           "assets/resorts/vietnam/peninsula-danang/2.jpg",
@@ -348,7 +357,7 @@ window.RESORTS_DATA = {
         description: [
           { type: "p", text: "Peninsula Danang — отель всего в 100 метрах от пляжа Микхе, один из самых удобно расположенных объектов клубной программы в Дананге." },
           { type: "h2", text: "Расположение" },
-          { type: "p", text: "До Моста через реку Хан — 3,3 км, до Моста влюблённых в Дананге — 3,9 км, до международного аэропорта Дананг — 7 км. Отличный отель для отдыха вдвоем или семьей" },
+          { type: "p", text: "До Моста через реку Хан — 3,3 км, до Моста влюблённых в Дананге — 3,9 км, до международного аэропорта Дананг — 7 км. Гости, путешествующие вдвоём, оценивают расположение отеля на 8,9 из 10." },
           { type: "h2", text: "Номера" },
           { type: "ul", items: [
             "**Удобства номеров:** кондиционер, сейф, телевизор с плоским экраном, письменный стол, чайник, холодильник и мини-бар.",
@@ -368,6 +377,7 @@ window.RESORTS_DATA = {
         slug: "the-hill-residence",
         name: "The Hill Residence",
         location: "о. Фукуок, Вьетнам",
+        stars: 4,
         images: [
           "assets/resorts/vietnam/the-hill-residence/1.jpg",
           "assets/resorts/vietnam/the-hill-residence/2.jpg",
@@ -403,6 +413,7 @@ window.RESORTS_DATA = {
         slug: "bg-villas",
         name: "BG Villas & Aparts",
         location: "Калкан, Турция",
+        stars: 4,
         images: [
           "assets/resorts/turkey/bg-villas/1.jpg",
           "assets/resorts/turkey/bg-villas/2.jpg",
@@ -413,7 +424,7 @@ window.RESORTS_DATA = {
         description: [
           { type: "p", text: "BG Villas & Aparts — дом для отпуска в тихом прибрежном городке Калкан, сочетающий формат апартаментов с уютной приватной территорией." },
           { type: "h2", text: "Расположение" },
-                    { type: "p", text: "**BG Villas расположены в живописном курортном городе Калкан на Средиземноморском побережье Турции** — месте, известном бирюзовым морем, уютными бухтами, красивыми видами и атмосферой спокойного отдыха." },
+          { type: "p", text: "**BG Villas расположены в живописном курортном городе Калкан на Средиземноморском побережье Турции** — месте, известном бирюзовым морем, уютными бухтами, красивыми видами и атмосферой спокойного отдыха." },
           { type: "p", text: "В непосредственной близости находятся **общественный пляж Калкана, яхтенная марина Kalkan Yacht Marine, рестораны, кафе и прогулочные зоны**. Удобное расположение позволяет легко добраться до центра города и при этом наслаждаться приватной атмосферой виллы." },
           { type: "p", text: "Калкан отлично подходит для тех, кто хочет совместить **пляжный отдых, морские прогулки, красивые закаты и неспешную курортную атмосферу Средиземноморья**." },
           { type: "h2", text: "Размещение" },
@@ -433,6 +444,7 @@ window.RESORTS_DATA = {
         slug: "grand-makel-topkapi",
         name: "Grand Makel Topkapi",
         location: "Стамбул, Турция",
+        stars: 5,
         images: [
           "assets/resorts/turkey/grand-makel-topkapi/1.jpg",
           "assets/resorts/turkey/grand-makel-topkapi/2.jpg",
@@ -443,7 +455,7 @@ window.RESORTS_DATA = {
         description: [
           { type: "p", text: "Grand Makel Topkapi — отель у исторического полуострова Стамбула, в пешей доступности от станций трамвая и метробуса Cevizlibağ." },
           { type: "h2", text: "Расположение" },
-          { type: "p", text: "До площади Таксим — 13 км, до Айя-Софии — 12 км, до Гранд-базара и Галатской башни — 11 км. Международный аэропорт Стамбула находится в 44 км, аэропорт Сабиха Гёкчен — в 50 км." },
+          { type: "p", text: "До площади Таксим — 13 км, до Айя-Софии — 12 км, до Гранд-базара и Галатской башни — 11 км. Международный аэропорт Стамбула находится в 44 км, аэропорт Сабиха Гёкчен — в 50 км. Гости, путешествующие вдвоём, оценивают расположение на 8,7 из 10." },
           { type: "h2", text: "Номера" },
           { type: "ul", items: [
             "**Категории:** стандартные, Superior, номер для гостей с ограниченными возможностями, угловые люксы и люксы Makel–Topkapi.",
@@ -461,34 +473,6 @@ window.RESORTS_DATA = {
             "**Доступность:** номера для некурящих и условия для гостей с ограниченными физическими возможностями."
           ] }
         ]
-      },
-      {
-        slug: "marina-apart",
-        name: "Sigacik Marina Apart Hotel",
-        location: "Измир, Турция",
-        images: [
-          "assets/resorts/turkey/marina-apart/1.jpg",
-          "assets/resorts/turkey/marina-apart/2.jpg",
-          "assets/resorts/turkey/marina-apart/3.jpg",
-          "assets/resorts/turkey/marina-apart/4.jpg",
-          "assets/resorts/turkey/marina-apart/5.jpg"
-        ],
-        description: [
-          { type: "p", text: "Sigacik Marina Apart Hotel — апарт-отель в Измире с видом на горы, сочетающий формат апартаментов с домашней атмосферой." },
-          { type: "h2", text: "Расположение" },
-          { type: "p", text: "До пляжа острова Есек — 2,7 км, до Измирской часовой башни и площади Конак — около 50 км, до аэропорта имени Аднана Мендереса — 60 км." },
-          { type: "h2", text: "Номера" },
-          { type: "ul", items: [
-            "**Удобства номеров:** гостиная зона, мини-кухня, кондиционер, телевизор с плоским экраном и спутниковыми каналами.",
-            "**Терраса:** балкон или терраса с видом на город или море.",
-            "**Ванная комната:** собственная ванная с душем, феном и тапочками."
-          ] },
-          { type: "h2", text: "Инфраструктура" },
-          { type: "ul", items: [
-            "**Номера:** доступны семейные номера.",
-            "**Связь и парковка:** бесплатный Wi-Fi, бесплатная парковка."
-          ] }
-        ]
       }
     ]
   },
@@ -499,6 +483,7 @@ window.RESORTS_DATA = {
         slug: "pacific-al-marian",
         name: "Pacific Al Marian",
         location: "о. Аль-Марджан, ОАЭ",
+        stars: 4,
         images: [
           "assets/resorts/uae/pacific-al-marian/1.jpg",
           "assets/resorts/uae/pacific-al-marian/2.jpg",
@@ -533,6 +518,7 @@ window.RESORTS_DATA = {
         slug: "marylanza-suites-spa",
         name: "Marylanza Suites & Spa",
         location: "Арона, о. Тенерифе",
+        stars: 4,
         images: [
           "assets/resorts/tenerife/marylanza-suites-spa/1.jpg",
           "assets/resorts/tenerife/marylanza-suites-spa/2.jpg",
@@ -564,6 +550,7 @@ window.RESORTS_DATA = {
         slug: "tropicana-resort",
         name: "Tropicana Resort",
         location: "Кальяо-Сальвахе, о. Тенерифе",
+        stars: 4,
         images: [
           "assets/resorts/tenerife/tropicana-resort/1.jpg",
           "assets/resorts/tenerife/tropicana-resort/2.jpg",
@@ -605,6 +592,7 @@ window.RESORTS_DATA = {
         slug: "sun-village",
         name: "Sun Village",
         location: "Дженовичи, Черногория",
+        stars: 4,
         images: [
           "assets/resorts/montenegro/sun-village/1.jpg",
           "assets/resorts/montenegro/sun-village/2.jpg",
@@ -621,11 +609,11 @@ window.RESORTS_DATA = {
             "**Расстояния:** до аэропорта Тиват — 46 км, до Дубровника (Хорватия) — чуть более часа езды."
           ] },
           { type: "h2", text: "Размещение" },
-          { type: "p", text: "Комплекс состоит из четырёх вилл — Fiona, Galina, Bianca и Patricia, Также апартаменты." },
+          { type: "p", text: "Комплекс состоит из четырёх вилл — Fiona, Galina, Bianca и Patricia, всего 33 апартамента." },
           { type: "ul", items: [
             "**Типы номеров:** преимущественно двухкомнатные апартаменты площадью от 40 до 85 м².",
             "**Оснащение:** отдельная спальня, гостиная, балкон или терраса, кондиционер и телевизор.",
-            "**Кухня:** полноценная кухонная зона с плитой, холодильником и обеденной зоной."
+            "**Кухня:** полноценная кухонная зона с плитой, холодильником и обеденной зоной; в некоторых апартаментах может отсутствовать микроволновая печь или стиральная машина."
           ] },
           { type: "h2", text: "Инфраструктура и сервис" },
           { type: "ul", items: [
