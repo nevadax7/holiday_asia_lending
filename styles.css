@@ -541,8 +541,8 @@ a{ color: inherit; }
   line-height: 1;
 }
 .hotel-star{
-  width: 100em;
-  height: 100em;
+  width: 0.103em;
+  height: 0.103em;
   flex-shrink: 0;
 }
 @media (max-width: 640px){
