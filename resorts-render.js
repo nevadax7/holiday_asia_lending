@@ -9,6 +9,24 @@
     return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 12a8 8 0 0 1 16 0z"/><path d="M12 12v8"/><path d="M9 20c1-1 2-1 3 0s2 1 3 0"/></svg>';
   }
 
+  var starIdCounter = 0;
+  function starSVG() {
+    var gid = 'starGrad' + (starIdCounter++);
+    return '<svg class="hotel-star" viewBox="0 0 24 24" aria-hidden="true">' +
+      '<defs><linearGradient id="' + gid + '" x1="0%" y1="0%" x2="100%" y2="100%">' +
+      '<stop offset="0%" stop-color="#f7e6ba"/>' +
+      '<stop offset="55%" stop-color="#c9a24a"/>' +
+      '<stop offset="100%" stop-color="#96741f"/>' +
+      '</linearGradient></defs>' +
+      '<path d="M12 2.5l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.9-6.2 3.9 1.6-7L2 9.6l7.1-.6z" fill="url(#' + gid + ')" stroke="#8a6a24" stroke-width="0.5" stroke-linejoin="round"/>' +
+      '</svg>';
+  }
+  function starsSVG(count) {
+    var out = '';
+    for (var i = 0; i < count; i++) out += starSVG();
+    return out;
+  }
+
   function withVersion(src) {
     var v = window.RESORTS_ASSET_VERSION;
     if (!v) return src;
@@ -294,6 +312,8 @@
 
     document.title = hotel.name + ' — ' + hotel.location + ' | IVC&HPA';
     if (nameEl) nameEl.textContent = hotel.name;
+    var starsEl = document.getElementById('hotel-stars');
+    if (starsEl) starsEl.innerHTML = hotel.stars ? starsSVG(hotel.stars) : '';
     if (locEl) locEl.textContent = hotel.location;
     if (backEl) {
       backEl.href = 'resort-country.html?c=' + encodeURIComponent(countrySlug);
