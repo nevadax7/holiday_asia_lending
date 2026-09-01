@@ -536,13 +536,13 @@ a{ color: inherit; }
 .hotel-stars{
   display: inline-flex;
   align-items: center;
-  gap: 0.1em;
+  gap: 0.12em;
   font-size: clamp(28px, 4vw, 40px);
   line-height: 1;
 }
 .hotel-star{
-  width: 0.52em;
-  height: 0.52em;
+  width: 0.62em;
+  height: 0.62em;
   flex-shrink: 0;
 }
 @media (max-width: 640px){
