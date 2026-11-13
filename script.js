@@ -82,12 +82,12 @@
     var src = wrap.getAttribute('data-src');
     testImage(src).then(function (ok) {
       if (ok) {
-        wrap.innerHTML = '<img src="' + src + '" alt="Приглашение Naman Retreat">';
+        wrap.innerHTML = '<img src="' + src + '" alt="Приглашение The Hill Residence">';
         wrap.classList.add('invite-media--clickable');
         wrap.setAttribute('role', 'button');
         wrap.setAttribute('tabindex', '0');
         wrap.setAttribute('aria-label', 'Открыть изображение приглашения на весь экран');
-        var openThis = function () { openSimpleLightbox(src, 'Приглашение Naman Retreat'); };
+        var openThis = function () { openSimpleLightbox(src, 'Приглашение The Hill Residence'); };
         wrap.addEventListener('click', openThis);
         wrap.addEventListener('keydown', function (e) {
           if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openThis(); }
@@ -108,29 +108,19 @@
 
   // ---------- invitation page: participation number + save-to-gallery ----------
 
-  // Готовый дизайн карточки (фото приглашения + брендированный блок с номером
-  // и описанием) — цельная картинка, которую готовит сам заказчик и кладёт
-  // в корень репозитория под этим именем. Код только "впечатывает" сгенерированный
-  // номер поверх неё в нужном месте — саму карточку кодом больше не рисуем.
-  var TICKET_TEMPLATE_SRC = 'ticket-template.png';
-
-  // Координаты места под номер заданы в ДОЛЯХ от ширины/высоты картинки
-  // (0..1), чтобы работать на любом реальном размере файла. Если после
-  // сохранения номер окажется не совсем на своём месте — присылайте
-  // скриншот результата, эти четыре числа поправляются за одну правку.
-  var TICKET_NUMBER_X_FRAC = 0.30;   // по горизонтали: центр под "ВАШ НОМЕР УЧАСТНИКА"
-  var TICKET_NUMBER_Y_FRAC = 0.805;  // по вертикали
-  var TICKET_NUMBER_MAX_WIDTH_FRAC = 0.36; // не шире левой колонки
-  var TICKET_NUMBER_FONT_SIZE_FRAC = 0.078; // крупнее прежнего (было 0.062)
-  var TICKET_NUMBER_COLOR = '#0c4a4d'; // тот же цвет, что и "HOLIDAY ASIA" на карточке
+  // Используем то же приглашение, что показано на странице.
+  var TICKET_TEMPLATE_SRC = document.getElementById('invite-media')
+    ? document.getElementById('invite-media').getAttribute('data-src')
+    : 'invitation-hill-residence.png';
 
   function generateTicketNumber() {
-    var length = 5 + Math.floor(Math.random() * 3); // 5, 6 or 7 digits
-    var digits = '';
-    for (var i = 0; i < length; i++) {
-      digits += Math.floor(Math.random() * 10);
+    var bytes = new Uint32Array(1);
+    if (window.crypto && window.crypto.getRandomValues) {
+      window.crypto.getRandomValues(bytes);
+    } else {
+      bytes[0] = Math.floor(Math.random() * 0xffffffff);
     }
-    return digits;
+    return ('0000000' + (bytes[0] % 10000000)).slice(-7);
   }
 
   // Шаблон грузим ЗАРАНЕЕ (как только открылась страница), а не в момент
@@ -150,28 +140,33 @@
   function paintTicketImage(canvas, ctx, img, number, callback) {
     try {
       var W = img.naturalWidth;
-      var H = img.naturalHeight;
+      var imageHeight = img.naturalHeight;
+      var footerHeight = Math.round(W * 0.30);
       canvas.width = W;
-      canvas.height = H;
-      ctx.drawImage(img, 0, 0, W, H);
+      canvas.height = imageHeight + footerHeight;
+      ctx.drawImage(img, 0, 0, W, imageHeight);
 
-      var centerX = W * TICKET_NUMBER_X_FRAC;
-      var centerY = H * TICKET_NUMBER_Y_FRAC;
-      var maxWidth = W * TICKET_NUMBER_MAX_WIDTH_FRAC;
-
+      ctx.fillStyle = '#f5efe5';
+      ctx.fillRect(0, imageHeight, W, footerHeight);
+      ctx.fillStyle = '#0c4a4d';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillStyle = TICKET_NUMBER_COLOR;
+      ctx.font = '700 ' + Math.round(W * 0.034) + 'px Arial, sans-serif';
+      ctx.fillText('HOLIDAY ASIA', W * 0.5, imageHeight + W * 0.052);
+      ctx.font = '700 ' + Math.round(W * 0.019) + 'px Arial, sans-serif';
+      ctx.fillText('ВАШ НОМЕР УЧАСТНИКА', W * 0.28, imageHeight + W * 0.125);
+      ctx.font = '800 ' + Math.round(W * 0.075) + 'px Arial, sans-serif';
+      ctx.fillText(number, W * 0.28, imageHeight + W * 0.205, W * 0.46);
 
-      var fontSize = Math.round(W * TICKET_NUMBER_FONT_SIZE_FRAC);
-      var fits = false;
-      while (!fits && fontSize > 20) {
-        ctx.font = '800 ' + fontSize + 'px Inter, Arial, sans-serif';
-        if (ctx.measureText(number).width <= maxWidth) fits = true;
-        else fontSize -= 2;
-      }
-
-      ctx.fillText(number, centerX, centerY);
+      ctx.fillStyle = '#b99b60';
+      ctx.fillRect(W * 0.55, imageHeight + W * 0.09, Math.max(1, W * 0.001), W * 0.18);
+      ctx.fillStyle = '#0c4a4d';
+      ctx.font = '700 ' + Math.round(W * 0.019) + 'px Arial, sans-serif';
+      ctx.fillText('ОПИСАНИЕ', W * 0.77, imageHeight + W * 0.125);
+      ctx.font = '400 ' + Math.round(W * 0.018) + 'px Arial, sans-serif';
+      ['Предъявите этот номер', 'в офисе для регистрации', 'и получения подарка'].forEach(function (line, i) {
+        ctx.fillText(line, W * 0.77, imageHeight + W * (0.17 + i * 0.031));
+      });
 
       canvas.toBlob(function (blob) {
         if (!blob) { callback({ error: 'toblob-failed' }); return; }
@@ -288,7 +283,7 @@
 
         if (result.error) {
           if (result.error === 'template-missing') {
-            statusEl.textContent = 'Не найден файл ticket-template.png в папке сайта — загрузите его и попробуйте снова.';
+            statusEl.textContent = 'Не удалось загрузить изображение приглашения. Обновите страницу и попробуйте снова.';
           } else {
             statusEl.textContent = 'Не удалось подготовить картинку. Попробуйте ещё раз.';
           }
